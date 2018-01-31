@@ -4,19 +4,36 @@ buildscript {
 	}
 	repositories {
 		mavenCentral()
+		maven { url "https://repo.spring.io/plugins-release" }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE")
+		classpath("io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE")
 	}
 }
+
+ext.springBootVersion = "1.5.9.RELEASE"
+ext.springCloudVersion = "Edgware.SR1"
+ext.lombokVersion = "1.16.8"
+group = 'com.hk.springboot.ui'
+version = '0.0.1-SNAPSHOT'
+//sourceCompatibility = 1.8
+
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+apply plugin: "io.spring.dependency-management"
 
-group = 'com.hk.springboot.ui'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+
 
 repositories {
 	mavenCentral()
@@ -26,7 +43,9 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-actuator')
-	
+	compile('org.springframework.boot:spring-boot-autoconfigure')
+	runtime('org.springframework.cloud:spring-cloud-starter-config')
+	compile('org.springframework.cloud:spring-cloud-context')
 	//runtime('org.springframework.boot:spring-boot-devtools')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
