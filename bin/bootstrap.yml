@@ -1,9 +1,0 @@
-spring:
-  application:
-    name: srvrs
-  cloud:
-    config:
-      uri: http://localhost:8888/admin
-management:
-  security:
-    enabled: false       

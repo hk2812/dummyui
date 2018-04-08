@@ -1,51 +1,49 @@
 buildscript {
-	ext {
-		springBootVersion = '1.5.4.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-		maven { url "https://repo.spring.io/plugins-release" }
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.4.RELEASE")
-		classpath("io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE")
-	}
+    ext { springBootVersion = '1.5.9.RELEASE' }
+    repositories { mavenCentral() }
+    dependencies { classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") }
 }
 
-ext.springBootVersion = "1.5.4.RELEASE"
-ext.springCloudVersion = "Edgware.SR1"
-ext.lombokVersion = "1.16.8"
-group = 'com.hk.springboot.ui'
-version = '0.0.1-SNAPSHOT'
-//sourceCompatibility = 1.8
 
+
+
+//group = 'com.hk.springboot.ui'
+//version = '0.0.1-SNAPSHOT'
+//sourceCompatibility = 1.8
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
-apply plugin: "io.spring.dependency-management"
+apply plugin: 'io.spring.dependency-management'
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
-dependencyManagement {
-	imports {
-		mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-	}
-}
-
-
-
-repositories {
-	mavenCentral()
-}
-
+repositories { mavenCentral() }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework.boot:spring-boot-starter-actuator')
-	compile('org.springframework.boot:spring-boot-autoconfigure')
-	compile('org.springframework.cloud:spring-cloud-starter-config')
-	compile('org.springframework.cloud:spring-cloud-context')
-	//runtime('org.springframework.boot:spring-boot-devtools')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.springframework.cloud:spring-cloud-starter-config')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Dalston.SR5"
+    }
+}
+
+repositories {
+    maven {
+        url 'https://repo.spring.io/libs-milestone'
+    }
+}
+
+eclipse {
+    classpath {
+        containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+        containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+    }
 }

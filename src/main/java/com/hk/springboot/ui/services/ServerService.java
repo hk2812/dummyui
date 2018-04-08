@@ -8,22 +8,31 @@ import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
 
+import com.hk.springboot.ui.config.Chnnel;
+import com.hk.springboot.ui.config.ChnnelConfigList;
 import com.hk.springboot.ui.config.ServerConfigList;
 
 @Service
+@RefreshScope
 public class ServerService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ServerService.class);
-
-	private final ServerConfigList serverConfigList;
-
+	@Value("${message:Hello default}")
+    private String message;
+	
 	@Autowired
-	public ServerService(ServerConfigList properties) {
-		this.serverConfigList = properties;
-	}
+	private ServerConfigList serverConfigList;
+	
+	@Autowired
+	private ChnnelConfigList channelConfigList;
 
+	
+
+	
 	@PostConstruct
 	public List<String> getServers() {
 
@@ -36,5 +45,20 @@ public class ServerService {
 		test.add("test2");
 		return test;
 
+	}
+	@PostConstruct
+	public List<Chnnel> getChannelList() {
+
+		LOGGER.info("Method getChannel");
+		
+		List<Chnnel> cfg = this.channelConfigList.getChnnels();
+	    LOGGER.info("from config:" + cfg);
+		return cfg;
+
+	}
+	
+	public String getMessage() {
+		
+		return this.message;
 	}
 }

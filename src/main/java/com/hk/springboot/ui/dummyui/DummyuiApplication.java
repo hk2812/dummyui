@@ -8,11 +8,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-import com.hk.springboot.ui.config.ServerConfigList;
 
 @SpringBootApplication
 
-@EnableAutoConfiguration
+//@EnableAutoConfiguration
 @ComponentScan(basePackages = { "com.hk.springboot.ui" })
 
 public class DummyuiApplication {
