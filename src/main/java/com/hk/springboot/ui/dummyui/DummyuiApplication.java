@@ -5,11 +5,16 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+
+import com.hk.springboot.ui.config.ServerConfigList;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.hk.springboot.ui."})
+
 @EnableAutoConfiguration
-@EnableConfigurationProperties
+@ComponentScan(basePackages = { "com.hk.springboot.ui" })
+@EnableC
 public class DummyuiApplication {
 
 	public static void main(String[] args) {

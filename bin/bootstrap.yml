@@ -1,8 +1,6 @@
 spring:
   application:
-    name: config-server-testfiles
-  profiles:
-    active: development  
+    name: srvrs
   cloud:
     config:
       uri: http://localhost:8888/admin
