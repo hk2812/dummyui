@@ -14,7 +14,7 @@ import com.hk.springboot.ui.config.ServerConfigList;
 
 @EnableAutoConfiguration
 @ComponentScan(basePackages = { "com.hk.springboot.ui" })
-@EnableC
+
 public class DummyuiApplication {
 
 	public static void main(String[] args) {
